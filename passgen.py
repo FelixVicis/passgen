@@ -16,8 +16,11 @@ def get_dictionary(path):
         return f.read().splitlines()
 
 
-def generate_word_password(dictionary=get_path_from_home('dictionary.dic'), n=4, **kwargs):
+def generate_word_password(dictionary=None, n=4, **kwargs):
     rand = seed()
+
+    if (not dictionary):
+        dictionary = get_path_from_home('dictionary.dic')
 
     dictionary = get_dictionary(dictionary)
 
@@ -84,7 +87,7 @@ if __name__ == "__main__":
     parser.add_argument('--dictionary', '-d',
                         type=str,
                         metavar="path_to_file",
-                        default='dictionary.dic',
+                        default=None,
                         help="Overrides the dictionary file used.")
 
     parser.add_argument('-n',
